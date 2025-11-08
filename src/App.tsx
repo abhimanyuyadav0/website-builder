@@ -1,34 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import PageRenderer from './components/PageRenderer'
+import siteConfig from './config/site'
+import type { PageConfig } from './types/site'
+
+const flattenPages = (pages: PageConfig[], parentPath = ''): Array<{ page: PageConfig; path: string }> => {
+  return pages.flatMap((page) => {
+    const path = normalizePath(parentPath, page.path)
+    const current = { page, path }
+    const children = page.children ? flattenPages(page.children, path) : []
+    return [current, ...children]
+  })
+}
+
+const normalizePath = (parentPath: string, childPath: string) => {
+  if (childPath.startsWith('/')) {
+    return childPath
+  }
+
+  const base = parentPath === '/' ? '' : parentPath
+  return `${base}/${childPath}`.replace(/\/{2,}/g, '/')
+}
+
+const pagesWithPaths = flattenPages(siteConfig.site.pages)
+
+const NotFound = () => (
+  <div className="flex min-h-screen flex-col items-center justify-center bg-slate-900 px-6 text-center text-white">
+    <h1 className="text-4xl font-semibold">Page not found</h1>
+    <p className="mt-4 text-sm text-slate-300">This route is not defined in the site configuration.</p>
+  </div>
+)
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        {pagesWithPaths.map(({ page, path }) => (
+          <Route
+            key={page.id}
+            path={path}
+            element={<PageRenderer page={page} global={siteConfig.site.global} />}
+          />
+        ))}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
