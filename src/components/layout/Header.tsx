@@ -1,4 +1,4 @@
-import Button from '../ui/Button'
+import Button from '../Button'
 
 interface HeaderProps {
   brand?: string

@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PageRenderer from './components/PageRenderer'
 import siteConfig from './config/site'
 import type { PageConfig } from './types/site'
+import PageBuilder from './pages/pageBuilder'
 
 const flattenPages = (pages: PageConfig[], parentPath = ''): Array<{ page: PageConfig; path: string }> => {
   return pages.flatMap((page) => {
@@ -34,6 +35,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/page-builder" element={<PageBuilder />} />
         {pagesWithPaths.map(({ page, path }) => (
           <Route
             key={page.id}
