@@ -1,8 +1,10 @@
+import { useEffect, useMemo, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PageRenderer from './components/PageRenderer'
-import siteConfig from './config/site'
-import type { PageConfig } from './types/site'
 import PageBuilder from './pages/pageBuilder'
+import siteConfig from './config/site'
+import type { PageConfig, SiteConfig } from './types/site'
+import { loadStoredConfig } from './utils/siteConfigStorage'
 
 const flattenPages = (pages: PageConfig[], parentPath = ''): Array<{ page: PageConfig; path: string }> => {
   return pages.flatMap((page) => {
@@ -22,8 +24,6 @@ const normalizePath = (parentPath: string, childPath: string) => {
   return `${base}/${childPath}`.replace(/\/{2,}/g, '/')
 }
 
-const pagesWithPaths = flattenPages(siteConfig.site.pages)
-
 const NotFound = () => (
   <div className="flex min-h-screen flex-col items-center justify-center bg-slate-900 px-6 text-center text-white">
     <h1 className="text-4xl font-semibold">Page not found</h1>
@@ -32,15 +32,34 @@ const NotFound = () => (
 )
 
 function App() {
+  const [config, setConfig] = useState<SiteConfig>(() => {
+    if (typeof window === 'undefined') {
+      return siteConfig
+    }
+    return loadStoredConfig()
+  })
+
+  useEffect(() => {
+    const syncConfig = () => {
+      setConfig(loadStoredConfig())
+    }
+
+    syncConfig()
+    window.addEventListener('site-config-updated', syncConfig)
+    return () => window.removeEventListener('site-config-updated', syncConfig)
+  }, [])
+
+  const pagesWithPaths = useMemo(() => flattenPages(config.site.pages), [config])
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/page-builder" element={<PageBuilder />} />
+        <Route path="/page-builder" element={<PageBuilder initialConfig={config} />} />
         {pagesWithPaths.map(({ page, path }) => (
           <Route
             key={page.id}
             path={path}
-            element={<PageRenderer page={page} global={siteConfig.site.global} />}
+            element={<PageRenderer page={page} global={config.site.global} />}
           />
         ))}
         <Route path="*" element={<NotFound />} />

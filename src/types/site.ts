@@ -32,6 +32,7 @@ export interface PageConfig {
   }
   sections: SectionConfig[]
   children?: PageConfig[]
+  metadata?: PageMetadata
 }
 
 export interface SectionConfig {
@@ -39,5 +40,10 @@ export interface SectionConfig {
   component: string
   props?: Record<string, unknown>
   style?: Record<string, unknown>
+}
+
+export interface PageMetadata {
+  createdAt?: string
+  updatedAt?: string
 }
 

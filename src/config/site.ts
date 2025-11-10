@@ -28,6 +28,10 @@ const siteConfig: SiteConfig = {
         path: '/',
         name: 'Home',
         layout: 'default',
+        metadata: {
+          createdAt: '2024-01-01T09:00:00.000Z',
+          updatedAt: '2024-10-01T10:00:00.000Z',
+        },
         seo: {
           title: 'Acme Home',
           description: 'Welcome to Acme',
@@ -142,6 +146,10 @@ const siteConfig: SiteConfig = {
         path: '/contact',
         name: 'Contact',
         layout: 'form',
+        metadata: {
+          createdAt: '2024-01-10T11:00:00.000Z',
+          updatedAt: '2024-08-18T08:30:00.000Z',
+        },
         seo: {
           title: 'Talk with sales',
           description: 'Reach our team using the form',
@@ -167,6 +175,10 @@ const siteConfig: SiteConfig = {
         path: '/pricing',
         name: 'Pricing',
         layout: 'default',
+        metadata: {
+          createdAt: '2024-03-22T13:00:00.000Z',
+          updatedAt: '2024-09-05T15:15:00.000Z',
+        },
         seo: {
           title: 'Pricing plans',
           description: 'Plans that scale with your ambition.',
