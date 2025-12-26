@@ -39,88 +39,154 @@ const siteConfig: SiteConfig = {
         sections: [
           {
             key: 'hero',
-            component: 'HeroBanner',
-            props: {
-              heading: 'Build faster',
-              subheading: 'Ship in weeks, not months',
-              cta: {
-                label: 'Get Started',
-                href: '/contact',
-              },
-              media: {
-                type: 'image',
-                src: '/assets/hero.jpg',
-                alt: 'Team building product',
-              },
-            },
+            component: 'Container',
+            props: {},
             style: {
               background: '#F4F6FB',
-              padding: { top: 96, bottom: 96 },
+              padding: '96px 24px',
+              textAlign: 'center',
             },
           },
           {
-            key: 'features',
-            component: 'FeatureGrid',
+            key: 'hero-title',
+            component: 'Typography',
             props: {
-              title: 'Why teams choose Acme',
-              items: [
-                { icon: 'Rocket', title: 'Faster go-live', body: 'Launch pages in days.' },
-                { icon: 'Shield', title: 'Secure', body: 'Enterprise-grade security.' },
-                { icon: 'Sparkles', title: 'Flexible', body: 'Compose bespoke sites with reusable sections.' },
-              ],
+              variant: 'h1',
+              children: 'Build faster',
+            },
+            style: {
+              marginBottom: '16px',
             },
           },
           {
-            key: 'stats',
-            component: 'StatsGrid',
+            key: 'hero-subtitle',
+            component: 'Typography',
             props: {
-              eyebrow: 'Outcomes',
-              title: 'Impact that compounds',
-              description: 'Teams using Acme ship faster experiences without sacrificing brand consistency.',
-              items: [
-                { label: 'Time-to-launch', value: '2 weeks', description: 'Average timeline from brief to launch' },
-                { label: 'Conversion lift', value: '38%', description: 'Median uplift after migrating critical flows' },
-                { label: 'Design debt', value: '-72%', description: 'Reduction in duplicated design work' },
-                { label: 'NPS', value: '68', description: 'Customer satisfaction score' },
-              ],
+              variant: 'h3',
+              children: 'Ship in weeks, not months',
+            },
+            style: {
+              marginBottom: '32px',
+              color: '#64748b',
             },
           },
           {
-            key: 'cta-buttons',
-            component: 'ButtonGroup',
+            key: 'hero-button',
+            component: 'Button',
             props: {
-              title: 'Launch your next experience',
-              subtitle: 'Choose a path that fits your team and timeline.',
-              alignment: 'center',
-              buttons: [
-                { label: 'Explore pricing', href: '/pricing', variant: 'primary', size: 'lg' },
-                { label: 'Talk to sales', href: '/contact', variant: 'secondary', size: 'lg' },
-              ],
+              children: 'Get Started',
+              variant: 'primary',
+              size: 'lg',
+            },
+            style: {
+              marginBottom: '96px',
             },
           },
           {
-            key: 'testimonials',
-            component: 'TestimonialList',
+            key: 'features-title',
+            component: 'Typography',
             props: {
-              title: 'Loved by product-led teams',
-              description: 'Acme brings marketing, product, and design into one connected workflow.',
-              testimonials: [
-                {
-                  quote: 'Acme lets us ideate and ship campaigns the same week, without waiting on engineering.',
-                  author: 'Riya Patel',
-                  role: 'Director of Growth, Eventio',
-                },
-                {
-                  quote: 'Our designers spend time on big ideas instead of rebuilding the same components.',
-                  author: 'Marcus Wong',
-                  role: 'Head of Design, Lumen',
-                },
-                {
-                  quote: 'The configuration JSON is our single source of truth for every launch.',
-                  author: 'Elena Davis',
-                  role: 'Product Marketing Lead, Northwind',
-                },
-              ],
+              variant: 'h2',
+              children: 'Why teams choose Acme',
+            },
+            style: {
+              textAlign: 'center',
+              marginBottom: '48px',
+              padding: '48px 24px 0',
+            },
+          },
+          {
+            key: 'features-grid',
+            component: 'Row',
+            props: {},
+            style: {
+              padding: '0 24px 48px',
+            },
+          },
+          {
+            key: 'feature-1',
+            component: 'Card',
+            props: {
+              title: 'Faster go-live',
+              children: 'Launch pages in days.',
+            },
+            style: {
+              margin: '12px',
+            },
+          },
+          {
+            key: 'feature-2',
+            component: 'Card',
+            props: {
+              title: 'Secure',
+              children: 'Enterprise-grade security.',
+            },
+            style: {
+              margin: '12px',
+            },
+          },
+          {
+            key: 'feature-3',
+            component: 'Card',
+            props: {
+              title: 'Flexible',
+              children: 'Compose bespoke sites with reusable sections.',
+            },
+            style: {
+              margin: '12px',
+            },
+          },
+          {
+            key: 'cta-section',
+            component: 'Container',
+            props: {},
+            style: {
+              padding: '48px 24px',
+              textAlign: 'center',
+            },
+          },
+          {
+            key: 'cta-title',
+            component: 'Typography',
+            props: {
+              variant: 'h2',
+              children: 'Launch your next experience',
+            },
+            style: {
+              marginBottom: '16px',
+            },
+          },
+          {
+            key: 'cta-subtitle',
+            component: 'Typography',
+            props: {
+              variant: 'body1',
+              children: 'Choose a path that fits your team and timeline.',
+            },
+            style: {
+              marginBottom: '32px',
+              color: '#64748b',
+            },
+          },
+          {
+            key: 'cta-button-1',
+            component: 'Button',
+            props: {
+              children: 'Explore pricing',
+              variant: 'primary',
+              size: 'lg',
+            },
+            style: {
+              marginRight: '16px',
+            },
+          },
+          {
+            key: 'cta-button-2',
+            component: 'Button',
+            props: {
+              children: 'Talk to sales',
+              variant: 'secondary',
+              size: 'lg',
             },
           },
         ],
@@ -132,9 +198,13 @@ const siteConfig: SiteConfig = {
             sections: [
               {
                 key: 'overview-content',
-                component: 'RichText',
+                component: 'Typography',
                 props: {
-                  content: '<p>Overview content...</p>',
+                  variant: 'body1',
+                  children: 'Overview content...',
+                },
+                style: {
+                  padding: '24px',
                 },
               },
             ],
@@ -156,16 +226,66 @@ const siteConfig: SiteConfig = {
         },
         sections: [
           {
-            key: 'contact-form',
-            component: 'ContactForm',
+            key: 'contact-title',
+            component: 'Typography',
             props: {
-              title: "Let's work together",
-              submitLabel: 'Send',
-              fields: [
-                { name: 'fullName', label: 'Full name', type: 'text', required: true },
-                { name: 'email', label: 'Email', type: 'email', required: true },
-                { name: 'message', label: 'Message', type: 'textarea' },
-              ],
+              variant: 'h1',
+              children: "Let's work together",
+            },
+            style: {
+              textAlign: 'center',
+              padding: '48px 24px 24px',
+            },
+          },
+          {
+            key: 'contact-form',
+            component: 'Container',
+            props: {},
+            style: {
+              maxWidth: '600px',
+              margin: '0 auto',
+              padding: '24px',
+            },
+          },
+          {
+            key: 'contact-name',
+            component: 'Input',
+            props: {
+              placeholder: 'Full name',
+              type: 'text',
+            },
+            style: {
+              marginBottom: '16px',
+            },
+          },
+          {
+            key: 'contact-email',
+            component: 'Input',
+            props: {
+              placeholder: 'Email',
+              type: 'email',
+            },
+            style: {
+              marginBottom: '16px',
+            },
+          },
+          {
+            key: 'contact-message',
+            component: 'Input',
+            props: {
+              placeholder: 'Message',
+              type: 'textarea',
+            },
+            style: {
+              marginBottom: '24px',
+            },
+          },
+          {
+            key: 'contact-submit',
+            component: 'Button',
+            props: {
+              children: 'Send',
+              variant: 'primary',
             },
           },
         ],
@@ -185,22 +305,56 @@ const siteConfig: SiteConfig = {
         },
         sections: [
           {
-            key: 'pricing-overview',
-            component: 'RichText',
+            key: 'pricing-title',
+            component: 'Typography',
             props: {
-              content:
-                '<h1>Pricing for every stage</h1><p>Choose a plan that matches your velocity. All tiers include collaborative editing and publishing workflows.</p>',
+              variant: 'h1',
+              children: 'Pricing for every stage',
+            },
+            style: {
+              textAlign: 'center',
+              padding: '48px 24px 16px',
+            },
+          },
+          {
+            key: 'pricing-description',
+            component: 'Typography',
+            props: {
+              variant: 'body1',
+              children: 'Choose a plan that matches your velocity. All tiers include collaborative editing and publishing workflows.',
+            },
+            style: {
+              textAlign: 'center',
+              padding: '0 24px 48px',
+              color: '#64748b',
             },
           },
           {
             key: 'pricing-actions',
-            component: 'ButtonGroup',
+            component: 'Container',
+            props: {},
+            style: {
+              textAlign: 'center',
+              padding: '0 24px 48px',
+            },
+          },
+          {
+            key: 'pricing-button-1',
+            component: 'Button',
             props: {
-              alignment: 'left',
-              buttons: [
-                { label: 'Start free trial', href: '/contact', variant: 'primary' },
-                { label: 'View enterprise', href: '/contact', variant: 'ghost' },
-              ],
+              children: 'Start free trial',
+              variant: 'primary',
+            },
+            style: {
+              marginRight: '16px',
+            },
+          },
+          {
+            key: 'pricing-button-2',
+            component: 'Button',
+            props: {
+              children: 'View enterprise',
+              variant: 'secondary',
             },
           },
         ],

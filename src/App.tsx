@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PageRenderer from './components/PageRenderer'
-import PageBuilder from './pages/pageBuilder'
+import DragDropBuilder from './pages/pageBuilder/DragDropBuilder'
 import siteConfig from './config/site'
 import type { PageConfig, SiteConfig } from './types/site'
 import { loadStoredConfig } from './utils/siteConfigStorage'
@@ -54,7 +54,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/page-builder" element={<PageBuilder initialConfig={config} />} />
+        <Route path="/page-builder" element={<DragDropBuilder initialConfig={config} />} />
         {pagesWithPaths.map(({ page, path }) => (
           <Route
             key={page.id}
